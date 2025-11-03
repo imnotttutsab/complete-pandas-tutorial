@@ -36,3 +36,37 @@ import pandas as pd
 
 # olympics_data = pd.read_excel('./data/olympics-data.xlsx')
 # print(olympics_data.head())
+
+
+
+
+
+
+
+
+
+
+
+
+#### FOR DATA SAMPLING AND SPECIFIC DATA  w/ sample, loc(), iloc()
+
+coffee = pd.read_csv("./warmup-data/coffee.csv")
+# coffee.index = coffee["Day"]
+# print(coffee.sample(4))
+
+# print(coffee.loc["Monday":"Wednesday"])
+# print(coffee.loc[6:9, ["Day", "Units Sold"]])
+
+# print(coffee.iloc[:3, [2]])
+
+# coffee.loc[1:3, "Units Sold"] = 10
+# print(coffee.loc[1]) 
+
+
+
+
+
+
+
+
+

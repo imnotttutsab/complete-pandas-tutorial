@@ -24,4 +24,15 @@ import pandas as pd
 
 
 
-#LOadinf data from CSV file
+# #LOading data from CSV file
+
+# coffee = pd.read_csv('./warmup-data/coffee.csv') #you can also provide a csv url instead of file path
+# print(coffee.head())      #the use of head() is optional but good for checking if the data is loaded correctly
+ 
+
+# results = pd.read_parquet('./data/results.parquet')
+# print(results.head())
+
+
+# olympics_data = pd.read_excel('./data/olympics-data.xlsx')
+# print(olympics_data.head())

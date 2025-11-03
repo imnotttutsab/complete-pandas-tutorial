@@ -62,6 +62,8 @@ coffee = pd.read_csv("./warmup-data/coffee.csv")
 # coffee.loc[1:3, "Units Sold"] = 10
 # print(coffee.loc[1]) 
 
+# coffee.at[0, "Units Sold"] = 15
+# print(coffee.at[0, "Units Sold"])
 
 
 
@@ -70,3 +72,23 @@ coffee = pd.read_csv("./warmup-data/coffee.csv")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+### ACCESSING DATA && ITERATING DFRAME USING FOR
+# print(coffee["Units Sold"])   #accessing a single column
+# print(coffee.Day)   #accessing a single column using attribute style access
+# print(coffee.sort_values("Units Sold"))
+# print(coffee.sort_values(["Units Sold","Coffee Type"], ascending=[1,0]))   #sorting values based on a column
+
+# for index, row in coffee.iterrows():
+#     print(index)
+#     print(row)

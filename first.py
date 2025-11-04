@@ -50,7 +50,7 @@ import pandas as pd
 
 #### FOR DATA SAMPLING AND SPECIFIC DATA  w/ sample, loc(), iloc()
 
-coffee = pd.read_csv("./warmup-data/coffee.csv")
+#coffee = pd.read_csv("./warmup-data/coffee.csv")
 # coffee.index = coffee["Day"]
 # print(coffee.sample(4))
 
@@ -92,3 +92,39 @@ coffee = pd.read_csv("./warmup-data/coffee.csv")
 # for index, row in coffee.iterrows():
 #     print(index)
 #     print(row)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### FILTERING DATA
+
+
+# bios = pd.read_csv("./data/bios.csv")
+# print(bios.head)
+# print(bios.info())
+
+# print(bios.loc[bios['height_cm']>215, ['name','NOC', 'born_country']])
+
+# print(bios[(bios['height_cm']>215) & (bios['born_country']=='USA')])
+
+# print(bios[bios['name'].str.contains('Keith')])  #filtering based on string contains
+# print(bios[bios['name'].str.contains('Keith|Patrick')])  #filtering based on multiple string contains using regex OR operator |
+
+# print(bios.query('born_country == "USA" and born_city == "New York"'))  #using query method to filter data see how we use and keyword instead of & operator and also "" inside single quotes ''

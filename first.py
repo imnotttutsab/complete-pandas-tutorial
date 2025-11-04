@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # #Think of Series as a single column
 # #Think of DataFrame as a table with multiple columns (rows and columns)
@@ -116,7 +117,7 @@ import pandas as pd
 #### FILTERING DATA
 
 
-# bios = pd.read_csv("./data/bios.csv")
+bios = pd.read_csv("./data/bios.csv")
 # print(bios.head)
 # print(bios.info())
 
@@ -128,3 +129,60 @@ import pandas as pd
 # print(bios[bios['name'].str.contains('Keith|Patrick')])  #filtering based on multiple string contains using regex OR operator |
 
 # print(bios.query('born_country == "USA" and born_city == "New York"'))  #using query method to filter data see how we use and keyword instead of & operator and also "" inside single quotes ''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ADDING COLUMNS && DROPPING COLUMNS/ROWS And Saving them
+
+
+# coffee = pd.read_csv("./warmup-data/coffee.csv")
+
+# coffee_new = coffee #if we do this it just points to the smae memory
+# coffee_the_return_of_the_bean = coffee.copy() #if we do this then we can create a seperate copy of coffee
+# coffee['price'] = np.where(coffee['Coffee Type']=='Espresso',3.99,5.99) #np.where is a numpy syntax taht iterates over the dataframe and runs certain task based on conditional (think of it as if else)
+# #the way to add new column is {{dataframe["column"] = "Value"}}
+# # print(coffee.head())
+# print(coffee_new.head())
+# print(coffee_the_return_of_the_bean.head())
+
+
+# coffee.drop(columns=['price'], inplace=True) #we need to specify "columns=" or else it will think of a index and inPlace makes sure that the drops is saved in the dataframe
+
+# coffee['revenue'] = coffee["Units Sold"] * coffee['price']
+# coffee.rename(columns={'price':'Price','revenue':'Revenue'}, inplace=True)
+# print(coffee.head())
+
+
+bios_new = bios.copy()
+bios_new['first_name']= bios_new['name'].str.split(' ').str[0]
+bios_new.index = bios['athlete_id']
+bios_new.drop(columns='athlete_id', inplace=True)
+bios_new['dob'] = pd.to_datetime(bios_new['born_date'])
+
+bios_new['born_year'] = bios_new['dob'].dt.year
+
+print(bios_new.query('first_name=="John"'))
+bios_new.to_csv('./data/bios_new.csv')

@@ -176,13 +176,32 @@ bios = pd.read_csv("./data/bios.csv")
 # print(coffee.head())
 
 
-bios_new = bios.copy()
-bios_new['first_name']= bios_new['name'].str.split(' ').str[0]
-bios_new.index = bios['athlete_id']
-bios_new.drop(columns='athlete_id', inplace=True)
-bios_new['dob'] = pd.to_datetime(bios_new['born_date'])
+# bios_new = bios.copy()
+# bios_new['first_name']= bios_new['name'].str.split(' ').str[0]
+# bios_new.index = bios['athlete_id']
+# bios_new.drop(columns='athlete_id', inplace=True)
+# bios_new['dob'] = pd.to_datetime(bios_new['born_date'])
 
-bios_new['born_year'] = bios_new['dob'].dt.year
+# bios_new['born_year'] = bios_new['dob'].dt.year
 
-print(bios_new.query('first_name=="John"'))
-bios_new.to_csv('./data/bios_new.csv')
+# print(bios_new.query('first_name=="John"'))
+# bios_new.to_csv('./data/bios_new.csv')
+
+# bios['height_category'] = bios['height_cm'].apply(lambda x: "Short" if x <165 else ('Average' if x<185 else 'Tall') ) #the use of apply with lambda function to create new column based on condition
+# print(bios.query('height_category == "Short"'))
+#remember the syntax of nested if else in lambda function is: value_if_true if condition else (value_if_true2 if condition2 else value_if_false2)
+
+# bios['weight_category'] = bios['weight_kg'].apply(lambda x:'Heavy Weight' if x>90 else 'Light Weight')
+# print(bios[["name", "NOC","weight_kg"]].query('weight_kg>90'))
+
+# def categorize_athelete(row):
+#     if row['height_cm']<175 and row['weight_kg']<70:
+#         return 'Lightweight'
+#     elif row['height_cm']<185 and row['weight_kg']<= 85:
+#         return 'Middleweight'
+#     else:
+#         return 'Heavyweight' 
+#     #we can also use row.height_cm instead of row['height_cm']
+    
+# bios['Category'] = bios.apply(categorize_athelete, axis=1) #note that axis=1 means we are applying the function row wise if axis=0 then it would be column wise
+# print(bios[['name','height_cm','weight_kg','Category']].head())

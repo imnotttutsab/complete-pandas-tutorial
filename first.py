@@ -205,3 +205,53 @@ bios = pd.read_csv("./data/bios.csv")
     
 # bios['Category'] = bios.apply(categorize_athelete, axis=1) #note that axis=1 means we are applying the function row wise if axis=0 then it would be column wise
 # print(bios[['name','height_cm','weight_kg','Category']].head())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### MERGING AND CONCATENATING 
+
+nocs = pd.read_csv('./data/noc_regions.csv')
+# print(nocs.head())
+bios_new=pd.merge(bios,nocs, left_on='born_country',right_on='NOC', how='left')
+#left_on and right_on are used when the column names are different in both dataframes for merging
+bios_new.rename(columns={'region':'born_country_full'}, inplace=True)
+# print(bios_new[['name','born_country','born_country_full']].head())
+ 
+
+# usa = bios[bios['born_country']=='USA'].copy()
+# gbr = bios[bios['born_country']=='GBR'].copy()
+
+# new_df = pd.concat([usa,gbr])
+# print(new_df[['name', 'born_country']].sample(15))
+
+
+results = pd.read_csv('./data/results.csv')
+print(results[results['medal']=='Gold'].head())
+# print(bios.info())
+# Correct filtering: use .isin() to produce a boolean Series for row-wise filtering
+combined_df = pd.merge(results[results['medal'].isin(['Gold', 'Silver', 'Bronze'])], bios, on='athlete_id', how='left')
+print(combined_df[['athlete_id', 'name','year','discipline','event','medal']].sample(10))

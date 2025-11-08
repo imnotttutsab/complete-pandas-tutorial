@@ -232,26 +232,64 @@ bios = pd.read_csv("./data/bios.csv")
 
 
 
-#### MERGING AND CONCATENATING 
+# #### MERGING AND CONCATENATING 
 
-nocs = pd.read_csv('./data/noc_regions.csv')
-# print(nocs.head())
-bios_new=pd.merge(bios,nocs, left_on='born_country',right_on='NOC', how='left')
-#left_on and right_on are used when the column names are different in both dataframes for merging
-bios_new.rename(columns={'region':'born_country_full'}, inplace=True)
-# print(bios_new[['name','born_country','born_country_full']].head())
+# nocs = pd.read_csv('./data/noc_regions.csv')
+# # print(nocs.head())
+# bios_new=pd.merge(bios,nocs, left_on='born_country',right_on='NOC', how='left')
+# #left_on and right_on are used when the column names are different in both dataframes for merging
+# bios_new.rename(columns={'region':'born_country_full'}, inplace=True)
+# # print(bios_new[['name','born_country','born_country_full']].head())
  
 
-# usa = bios[bios['born_country']=='USA'].copy()
-# gbr = bios[bios['born_country']=='GBR'].copy()
+# # usa = bios[bios['born_country']=='USA'].copy()
+# # gbr = bios[bios['born_country']=='GBR'].copy()
 
-# new_df = pd.concat([usa,gbr])
-# print(new_df[['name', 'born_country']].sample(15))
+# # new_df = pd.concat([usa,gbr])
+# # print(new_df[['name', 'born_country']].sample(15))
 
 
-results = pd.read_csv('./data/results.csv')
-print(results[results['medal']=='Gold'].head())
-# print(bios.info())
-# Correct filtering: use .isin() to produce a boolean Series for row-wise filtering
-combined_df = pd.merge(results[results['medal'].isin(['Gold', 'Silver', 'Bronze'])], bios, on='athlete_id', how='left')
-print(combined_df[['athlete_id', 'name','year','discipline','event','medal']].sample(10))
+# results = pd.read_csv('./data/results.csv')
+# print(results[results['medal']=='Gold'].head())
+# # print(bios.info())
+# # Correct filtering: use .isin() to produce a boolean Series for row-wise filtering
+# combined_df = pd.merge(results[results['medal'].isin(['Gold', 'Silver', 'Bronze'])], bios, on='athlete_id', how='left')
+# print(combined_df[['athlete_id', 'name','year','discipline','event','medal']].sample(10))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### HANDLING NAN VALUES
+
+coffee = pd.read_csv('./warmup-data/coffee.csv')
+
+coffee.loc[[0,1],'Units Sold'] = np.nan
+# print(coffee['Units Sold'].isna()) #this just returns boolean so we print only ones with NaN by following:
+# print(coffee[coffee['Units Sold'].isna()])
+# print(coffee.isna().sum())
+# coffee.fillna("A number")a general solution may also be to replace it with coffee['Units Sold'].mean()
+# coffee["Units Sold"].interpolate(). #works just like hoe the "+" thingy works in excel
+# coffee.dropna(). #drops the full entire row for specific we can do coffee.dropna(subset=["Units Sold"])
+

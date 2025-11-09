@@ -10,7 +10,7 @@ import numpy as np
 # print(df.tail(2))
 # print(df.info())
 # print(df.nunique())
-# print(df.shape)  
+# print(df.shape)
 
 
 
@@ -29,7 +29,7 @@ import numpy as np
 
 # coffee = pd.read_csv('./warmup-data/coffee.csv') #you can also provide a csv url instead of file path
 # print(coffee.head())      #the use of head() is optional but good for checking if the data is loaded correctly
- 
+
 
 # results = pd.read_parquet('./data/results.parquet')
 # print(results.head())
@@ -61,7 +61,7 @@ import numpy as np
 # print(coffee.iloc[:3, [2]])
 
 # coffee.loc[1:3, "Units Sold"] = 10
-# print(coffee.loc[1]) 
+# print(coffee.loc[1])
 
 # coffee.at[0, "Units Sold"] = 15
 # print(coffee.at[0, "Units Sold"])
@@ -200,9 +200,9 @@ bios = pd.read_csv("./data/bios.csv")
 #     elif row['height_cm']<185 and row['weight_kg']<= 85:
 #         return 'Middleweight'
 #     else:
-#         return 'Heavyweight' 
+#         return 'Heavyweight'
 #     #we can also use row.height_cm instead of row['height_cm']
-    
+
 # bios['Category'] = bios.apply(categorize_athelete, axis=1) #note that axis=1 means we are applying the function row wise if axis=0 then it would be column wise
 # print(bios[['name','height_cm','weight_kg','Category']].head())
 
@@ -232,7 +232,7 @@ bios = pd.read_csv("./data/bios.csv")
 
 
 
-# #### MERGING AND CONCATENATING 
+# #### MERGING AND CONCATENATING
 
 # nocs = pd.read_csv('./data/noc_regions.csv')
 # # print(nocs.head())
@@ -240,7 +240,7 @@ bios = pd.read_csv("./data/bios.csv")
 # #left_on and right_on are used when the column names are different in both dataframes for merging
 # bios_new.rename(columns={'region':'born_country_full'}, inplace=True)
 # # print(bios_new[['name','born_country','born_country_full']].head())
- 
+
 
 # # usa = bios[bios['born_country']=='USA'].copy()
 # # gbr = bios[bios['born_country']=='GBR'].copy()
@@ -283,13 +283,63 @@ bios = pd.read_csv("./data/bios.csv")
 
 #### HANDLING NAN VALUES
 
-coffee = pd.read_csv('./warmup-data/coffee.csv')
+# coffee = pd.read_csv('./warmup-data/coffee.csv')
 
-coffee.loc[[0,1],'Units Sold'] = np.nan
+# coffee.loc[[0,1],'Units Sold'] = np.nan
 # print(coffee['Units Sold'].isna()) #this just returns boolean so we print only ones with NaN by following:
 # print(coffee[coffee['Units Sold'].isna()])
 # print(coffee.isna().sum())
 # coffee.fillna("A number")a general solution may also be to replace it with coffee['Units Sold'].mean()
 # coffee["Units Sold"].interpolate(). #works just like hoe the "+" thingy works in excel
 # coffee.dropna(). #drops the full entire row for specific we can do coffee.dropna(subset=["Units Sold"])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### AGGREGATING DATA
+# bios  = pd.read_csv('./data/bios.csv')
+
+# print(bios.head())
+# print(bios[bios['born_country']=='USA']['born_region'].value_counts())
+
+# coffee = pd.read_csv('./warmup-data/coffee.csv')
+# print(coffee.groupby(["Coffee Type"])['Units Sold'].mean()) #So the function of groupby is to like whenever we compare the like sum thingy or mean thingy of all the rows it gives classficiation based on likeyeah try to understand it utsab
+
+
+# coffee['Price'] = np.where(coffee["Coffee Type"]=="Latte",5.99,3.99)
+# coffee["Revenue"] = coffee["Price"] * coffee["Units Sold"]
+# print(coffee.info())
+
+# print(coffee.groupby(["Coffee Type"]).agg({"Units Sold":"sum","Price":"mean"}))
+# print(coffee.groupby(["Day"]).agg({"Revenue":"sum"}))
+# pivot = coffee.pivot(columns='Coffee Type', index='Day', values='Revenue')
+# print(pivot.loc['Monday'])
+
 

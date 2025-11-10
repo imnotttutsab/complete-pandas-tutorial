@@ -329,12 +329,11 @@ bios = pd.read_csv("./data/bios.csv")
 # print(bios.head())
 # print(bios[bios['born_country']=='USA']['born_region'].value_counts())
 
-# coffee = pd.read_csv('./warmup-data/coffee.csv')
+coffee = pd.read_csv('./warmup-data/coffee.csv')
 # print(coffee.groupby(["Coffee Type"])['Units Sold'].mean()) #So the function of groupby is to like whenever we compare the like sum thingy or mean thingy of all the rows it gives classficiation based on likeyeah try to understand it utsab
 
-
-# coffee['Price'] = np.where(coffee["Coffee Type"]=="Latte",5.99,3.99)
-# coffee["Revenue"] = coffee["Price"] * coffee["Units Sold"]
+coffee['Price'] = np.where(coffee["Coffee Type"]=="Latte",5.99,3.99)
+coffee["Revenue"] = coffee["Price"] * coffee["Units Sold"]
 # print(coffee.info())
 
 # print(coffee.groupby(["Coffee Type"]).agg({"Units Sold":"sum","Price":"mean"}))
@@ -342,4 +341,51 @@ bios = pd.read_csv("./data/bios.csv")
 # pivot = coffee.pivot(columns='Coffee Type', index='Day', values='Revenue')
 # print(pivot.loc['Monday'])
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####ADVANCED FUNCTIONALITY
+
+coffee['yesterday_revenue'] = coffee["Revenue"].shift(2)        #gives the previous value pf shift like we take a certain column anf then do .shift("No. we want of prev data") this particular exmaple does just the prev revenue
+coffee['pct_change'] = (coffee['Revenue']  - coffee["yesterday_revenue"] )/coffee["Revenue"] *100
+
+# bios['height_rank'] = bios["height_cm"].rank()
+# print(bios[["name", "height_cm", "height_rank"]].sort_values(["height_rank"],ascending=False))
+
+coffee["Cum_revenue"]=coffee["Revenue"].cumsum()
+coffee["3day_rev"] = coffee.groupby("Coffee Type")['Units Sold'].rolling(3).sum().reset_index(level=0,drop=True)
+print(coffee) 
+
+
+
+###NOTE THAT THERE'S THIS NEW BACKEND FOUNDATION FOR PANDAS CALLED OYARROW AND IT HAS UPOPER HAND IN BEING RATHER EFFICIENT AND SUPPORTING SPECIIFC OPERATIONS LIKE STRING AND ALL 
 
